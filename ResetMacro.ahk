@@ -1,9 +1,11 @@
 ; By canhvjp
-; Version v1.1
+; Version v1.3
 global fullscreen := False	
-global worldPreviewResetKey := "g" ; [Keep this in lower case] world preview reset key (default: h)
+global worldPreviewResetKey := "h" ; [Keep this in lower case] world preview reset key (default: h)
 global pauseOnSwitch := False
 global coop := False
+global wideResets := True 
+global widthMultiplier := 2.5  
 ; Change setting to 0 will not reset!
 global renderDistance := 16
 global entityDistance := 500
@@ -11,6 +13,30 @@ global FOV := 95 ; For quake pro put 110
 global mouseSensitivity := 130
 SetKeyDelay, 0
 
+if (wideResets) {
+      newHeight := Floor(A_ScreenHeight / widthMultiplier)
+      WinRestore, ahk_exe javaw.exe
+      WinMove, ahk_exe javaw.exe,,0,0,%A_ScreenWidth%,%newHeight%
+    }
+Loop {
+WinGetTitle, title, ahk_exe javaw.exe
+   if (InStr(title, " - "))
+{
+	sleep 70
+	if (wideResets) {
+		  WinMaximize, ahk_exe javaw.exe
+	 }
+	 if (fullscreen) 
+	 {
+	 ControlSend,, {Blind}{F11}, ahk_exe javaw.exe
+	 }
+	break
+	}
+   else {
+   sleep 70
+   continue
+   }
+}
 
 ExitWorld()
 {
@@ -24,24 +50,14 @@ ResetPreview()
 
 ChangeToSence()
 {
- if WinExist("Fullscreen Projector (Preview)")
-    WinActivate 
+	WinMaximize, Fullscreen Projector
+    WinActivate, Fullscreen Projector
 }
 
 Return()
 {
- Loop
-  {
-   Sleep 70
-   If WinExist("Minecraft* 1.16.1 - Singleplayer")
-    {
-     Sleep 70
-     WinActivate
-     break
-     }
-   Else
-     continue
-  }
+     WinActivate, Minecraft
+	 WinMinimize, Fullscreen Projector
 }
 
 Chunk()
@@ -72,7 +88,6 @@ if (FOV)
   ControlSend,, {Blind}{Shift}, ahk_pid %pid%
 }
 
-
 Reset()
 {
  if (fullscreen) 
@@ -85,10 +100,18 @@ Reset()
  ExitWorld()
  Sleep 10
  ChangeToSence()
+ if (wideResets) {
+      newHeight := Floor(A_ScreenHeight / widthMultiplier)
+      WinRestore, ahk_exe javaw.exe
+      WinMove, ahk_exe javaw.exe,,0,0,%A_ScreenWidth%,%newHeight%
+    }
+ WinGetTitle, title, ahk_exe javaw.exe
+ ControlSend,, {Blind}{F3 down}{Esc}{F3 up}, ahk_exe javaw.exe
  Loop
  {
    Sleep 70
-   If WinExist("Minecraft* 1.16.1 - Singleplayer")
+   WinGetTitle, title, ahk_exe javaw.exe
+   if (InStr(title, " - "))
     {
 	 if (coop)
 	 {
@@ -103,11 +126,14 @@ Reset()
    Else
      continue
  }
- Return()
+ if (wideResets) {
+      WinMaximize, ahk_exe javaw.exe
+ }
  if (fullscreen) 
  {
  ControlSend,, {Blind}{F11}, ahk_exe javaw.exe
  }
+ Return()
  Click, Right
 }
 
