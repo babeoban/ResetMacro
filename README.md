@@ -14,6 +14,9 @@ Video: https://youtu.be/2UP313ofqx0
 
 Đặt setting về 0 nếu không muốn reset
 
+## Dự định trong tương lai
+Khiến macro sử dụng được với atum 1.1.1
+
 ## Báo lỗi
 Tại Discord: https://discord.gg/5FDSRCYcyq
 
