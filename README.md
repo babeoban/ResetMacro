@@ -23,4 +23,5 @@ Trước khi báo lỗi hãy đảm bảo:
 - Đã tắt Pause on lost focus!
 - OBS đang để tiếng Anh!
 - Đã đặt minecraft folder
-- Đã cài mod [Atum](https://github.com/VoidXWalker/Atum/releases/tag/v1.1.1)
+- Đã cài mod [Atum](https://github.com/VoidXWalker/Atum/releases/tag/v1.1.1) và [WorldPreview](https://github.com/VoidXWalker/WorldPreview/releases/tag/v2.3.3.1) và [Sodium](https://github.com/jan-leila/sodium-fabric/releases/tag/mc1.16.1-0.2.1%2Bbuild.10)
+- Đã xóa mod [Krypton](https://github.com/mrmangohands/krypton/releases/tag/mc1.16.1-0.1.3-SNAPSHOT%2B2021-02-20)
