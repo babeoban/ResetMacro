@@ -17,9 +17,10 @@ Video: https://youtu.be/2UP313ofqx0
 ## Báo lỗi
 Tại Discord: https://discord.gg/5FDSRCYcyq
 
-Trước khi báo lỗi hãy kiểm ra:
+Trước khi báo lỗi hãy đảm bảo:
 
 - Đang dùng macro bản mới nhất không!
 - Đã tắt Pause on lost focus!
 - OBS đang để tiếng Anh!
 - Đã đặt minecraft folder
+- Đã cài mod [Atum](https://github.com/VoidXWalker/Atum/releases/tag/v1.1.1)
