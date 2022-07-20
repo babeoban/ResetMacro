@@ -7,8 +7,6 @@ Auto Preview pause: Tự động pause bằng F3 khi worldpreview hoạt động
 
 Coop: Tự động open to lan
 
-Low Render: Giảm chunk khi reset làm giảm lag
-
 ## Cách chỉnh
 Video: https://youtu.be/2UP313ofqx0
 
