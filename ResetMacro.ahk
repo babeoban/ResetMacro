@@ -43,8 +43,6 @@ WinSet, AlwaysOnTop, Off, Minecraft
 
 LeavePreview() 
 {
-ControlSend,, {Blind}{%atumResetKey%}, Minecraft
-
 while (True) {
   numLines := 0
   Loop, Read, %logFile%\latest.log
@@ -66,10 +64,13 @@ while (True) {
   if (preview)
     break
 }
-
 ControlSend,, {Blind}{F3 down}{Esc}{F3 up}, Minecraft
 }
-
+ResetPreview()
+{
+ControlSend,, {Blind}{%atumResetKey%}, Minecraft
+LeavePreview()
+}
 ChangeToSence()
 {
 	WinMaximize, Fullscreen Projector
@@ -89,6 +90,7 @@ WinMinimize, Ninjabrain
 
 Reset()
 {
+ ControlSend,, {Blind}{%atumResetKey%}, Minecraft
  if (fullscreen) 
  {
  ControlSend,, {Blind}{F11}, Minecraft
@@ -134,13 +136,9 @@ Reset()
 }
 
 ;Hotkey below
-
 #IfWinActive, Minecraft
-
 U:: Reset()
-
 #IfWinActive, Fullscreen Projector
-
-U:: LeavePreview()
+U:: ResetPreview()
 
 
