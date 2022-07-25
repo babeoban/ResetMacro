@@ -12,38 +12,26 @@ global sence := "Numpad1"
 global wideSence := "Numpad2"
 
 ; Minecraft Setting
-global renderDistance := 16
-global entityDistance := 500
-global FOV := 95 ; For quake pro put 110
-global mouseSensitivity := 130
+global atumResetKey := "F6" ; [KEEP THIS LOWER CASE] world preview reset key (default: F6) 
 
 ; Delays
-global wait := 0 ; increase if not reset
+global wait := 500
 global maxLoops := 50 
 global beforeFreezeDelay := 500 
-global beforePauseDelay := 100
+global beforePauseDelay := 500 
 SetKeyDelay, 0
 
 ; Code below! Do not config
-global atumResetKey := ""
-
-GetAtumKey()
-{
-    optionsFile := StrReplace(logFile, "logs", "options.txt")
-    FileReadLine, atumKey, %optionsFile%, 98
-    return StrReplace(atumKey, "key_Create New World:key.keyboard.", "")
-}
-
-atumResetKey := GetAtumKey()
 
 logFile := RegExReplace(logFile, "logs(\/|\\)*", "logs")
-global optionsFile := ""
-    
+
 IfNotExist, %logFile% 
 {
     MsgBox, You have not set your Minecraft instance folder!
     ExitApp
 }
+
+IfWinNotExist, Fullscreen Projector 
 WinMinimize, Ninjabrain
 if (wideResets) {
       newHeight := Floor(A_ScreenHeight / widthMultiplier)
@@ -55,7 +43,7 @@ WinSet, AlwaysOnTop, Off, Minecraft
 
 LeavePreview() 
 {
-ControlSend,, {Blind}{F6}, Minecraft
+ControlSend,, {Blind}{%atumResetKey%}, Minecraft
 
 while (True) {
   numLines := 0
@@ -94,33 +82,6 @@ Return()
 	 WinMinimize, Fullscreen Projector
 }
 
-ResetSetting()
-{
-if (renderDistance)
-  {
-      RDPresses := renderDistance-2
-    ControlSend,, {Blind}{Shift down}{F3 down}{F 32}{Shift up}{F %RDPresses%}{D}{F3 up}, Minecraft
-  }
-if (FOV)
-  {
-    ; Tab to FOV reset then preset FOV to custom value with arrow keys
-    FOVPresses := ceil((110-FOV)*1.7875)
-    ControlSend,, {Blind}{Esc}{Tab 6}{enter}{Tab}{Right 150}{Left %FOVPresses%}{Esc}, Minecraft
-  }
-  if (mouseSensitivity)
-  {
-    SensPresses := ceil(mouseSensitivity/1.408)
-    ; Tab to mouse sensitivity reset then preset mouse sensitivity to custom value with arrow keys
-    ControlSend,, {Blind}{Esc}{Tab 6}{enter}{Tab 7}{enter}{tab}{enter}{tab}{Left 150}{Right %SensPresses%}{Esc 3}, Minecraft
-  }
-  if (entityDistance)
-  {
-    entityPresses := (5 - (entityDistance*.01)) * 143 / 4.5
-    ; Tab to video settings to reset entity distance
-    ControlSend,, {Blind}{Esc}{Tab 6}{enter}{Tab 6}{enter}{Tab 17}{Right 150}{Left %entityPresses%}{Esc 2}, Minecraft
-  }
-  ControlSend,, {Blind}{Shift}, ahk_pid %pid%
-}
 NinjaHide()
 {
 WinMinimize, Ninjabrain
@@ -133,7 +94,6 @@ Reset()
  ControlSend,, {Blind}{F11}, Minecraft
  }
  NinjaHide()
- Sleep %wait%
  ChangeToSence()
  send, {%wideSence%}
  if (wideResets) {
@@ -161,7 +121,6 @@ Reset()
    Else
      continue
  }
- ResetSetting()
  send, {%sence%}
  if (wideResets) {
       WinMaximize, Minecraft
