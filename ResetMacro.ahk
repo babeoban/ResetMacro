@@ -132,7 +132,7 @@ Reset()
  ControlSend,, {Blind}{F11}, Minecraft
  }
  Return()
- Click, Right
+ ControlSend,, {Blind}{Esc 2}, Minecraft
 }
 
 ;Hotkey below
