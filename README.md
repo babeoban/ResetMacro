@@ -10,9 +10,6 @@ Video: https://youtu.be/2UP313ofqx0
 
 Đặt setting về 0 nếu không muốn reset
 
-## Dự định trong tương lai
-Giúp dùng được ở cả 1.14+
-
 ## Báo lỗi
 Tại Discord: https://discord.gg/5FDSRCYcyq
 
