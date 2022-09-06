@@ -2,6 +2,9 @@
 
 #Include settings.ahk
 
+global onpreview := 0
+global lastReset := 0
+
 SetKeyDelay, 0
 while (True) {
   numLines := 0
@@ -30,29 +33,31 @@ if (wideResets) {
       WinRestore, Minecraft
       WinMove, Minecraft,,0,0,%A_ScreenWidth%,%newHeight%
 }
-sleep, 50
+sleep, 200 
 if (f3Mode) {
-while (True) {
-  numLines := 0
-  Loop, Read, %logFile%\latest.log
-  {
-    numLines += 1
-  }
-  preview := False
-  Loop, Read, %logFile%\latest.log
-  {
-    if ((numLines - A_Index) < 1)
-    {
-      if (InStr(A_LoopReadLine, "Starting Preview")) {
-        preview := True
-        previewStarted := A_NowUTC
-        break
+Setup()
+{  
+   numLines := 0
+   found := False
+   
+   Loop, Read, %logFile%
+   {
+      numLines += 1
+   }
+   Loop, Read, %logFile%
+   {
+      if ((numLines - A_Index) < 1)
+      {
+         if (InStr(A_LoopReadLine, key)){
+            found := True
+         }
       }
-    }
-  }
-  if (preview)
-    break
-}}
+   }
+
+   return found
+}
+ControlSend,, {Blind}{F3 down}{Esc}{F3 up}, Minecraft
+}
 if (ninjareset) {
 send, {%ninjabrain%}
 }
@@ -72,3 +77,4 @@ else {
 continue
 }
 }
+
